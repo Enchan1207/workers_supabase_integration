@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "terraform-remote-state"
-    key    = "worker_static_assets/terraform-stg.tfstate"
+    key    = "workers_supabase_integration/terraform-stg.tfstate"
     region = "auto"
 
     // R2のための設定
@@ -20,19 +20,19 @@ variable "cloudflare_account_id" {
 
 variable "app_origin" {
   type    = string
-  default = "https://stg-worker-static-assets.enchan.me"
+  default = "https://stg-workers-supabase-integration.enchan.me"
 }
 
 module "cloudflare_workers" {
   source                = "../../modules/cloudflare_workers"
   cloudflare_account_id = var.cloudflare_account_id
-  worker_name           = "worker-static-assets-stg"
+  worker_name           = "workers-supabase-integration-stg"
 }
 
 module "auth0" {
   source                    = "../../modules/auth0"
   auth0_callback            = var.app_origin
-  auth0_app_name            = "worker-static-assets-stg"
+  auth0_app_name            = "workers-supabase-integration-stg"
   auth0_resource_identifier = var.app_origin
   auth0_logout_url          = var.app_origin
   auth0_web_origin          = var.app_origin

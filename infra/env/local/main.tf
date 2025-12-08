@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "terraform-remote-state"
-    key    = "worker_static_assets/terraform-local.tfstate"
+    key    = "workers_supabase_integration/terraform-local.tfstate"
     region = "auto"
 
     // R2のための設定
@@ -22,7 +22,7 @@ variable "app_origin" {
 module "auth0" {
   source                    = "../../modules/auth0"
   auth0_callback            = var.app_origin
-  auth0_app_name            = "worker-static-assets-local"
+  auth0_app_name            = "workers-supabase-integration-local"
   auth0_resource_identifier = var.app_origin
   auth0_logout_url          = var.app_origin
   auth0_web_origin          = var.app_origin

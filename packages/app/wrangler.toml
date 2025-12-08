@@ -1,4 +1,4 @@
-name = "worker-static-assets"
+name = "workers-supabase-integration"
 compatibility_date = "2025-11-25"
 compatibility_flags = [ "nodejs_compat" ]
 main = "./backend/index.ts"
@@ -16,18 +16,18 @@ run_worker_first = [ "/api/*" ]
 # Staging
 #
 [env.staging]
-name = "worker-static-assets-stg"
+name = "workers-supabase-integration-stg"
 
 [[env.staging.routes]]
-pattern = "stg-worker-static-assets.enchan.me"
+pattern = "stg-workers-supabase-integration.enchan.me"
 custom_domain = true
 
 #
 # Production
 #
 [env.production]
-name = "worker-static-assets-prod"
+name = "workers-supabase-integration-prod"
 
 [[env.production.routes]]
-pattern = "worker-static-assets.enchan.me"
+pattern = "workers-supabase-integration.enchan.me"
 custom_domain = true

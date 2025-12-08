@@ -1,5 +1,5 @@
 {
-    "name": "worker_static_assets",
+    "name": "workers-supabase-integration",
     "scripts": {
         "lint": "eslint",
         "lint:fix": "eslint --fix",
