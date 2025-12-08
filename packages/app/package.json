@@ -1,0 +1,26 @@
+{
+    "name": "app",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc -b && vite build",
+        "deploy:stg": "vite build --mode=staging && wrangler --env=staging deploy",
+        "deploy:prod": "vite build --mode=production && wrangler --env=production deploy"
+    },
+    "dependencies": {
+        "@auth0/auth0-react": "^2.10.0",
+        "hono": "^4.10.7",
+        "react": "^19.2.1",
+        "react-dom": "^19.2.1"
+    },
+    "devDependencies": {
+        "@cloudflare/vite-plugin": "^1.15.3",
+        "@cloudflare/workers-types": "^4.20251202.0",
+        "@types/node": "^24.10.1",
+        "@types/react": "^19.2.7",
+        "@types/react-dom": "^19.2.3",
+        "@vitejs/plugin-react": "^5.1.1",
+        "vite": "^7.2.6",
+        "wrangler": "^4.51.0"
+    }
+}
