@@ -14,7 +14,21 @@ terraform {
   }
 }
 
+// Will be injected via ENV vars
 variable "cloudflare_account_id" {
+  type = string
+}
+
+variable "supabase_access_token" {
+  type      = string
+  sensitive = true
+}
+
+variable "supabase_organization_id" {
+  type = string
+}
+
+variable "supabase_database_password" {
   type = string
 }
 
@@ -38,6 +52,19 @@ module "auth0" {
   auth0_web_origin          = var.app_origin
 }
 
+module "supabase" {
+  source                     = "../../modules/supabase"
+  supabase_access_token      = var.supabase_access_token
+  supabase_organization_id   = var.supabase_organization_id
+  supabase_project_name      = "workers-supabase-integration-prod"
+  supabase_database_password = var.supabase_database_password
+}
+
 output "VITE_AUTH0_CLIENT_ID" {
   value = module.auth0.auth0_app_client_id
 }
+
+output "DATABASE_URL" {
+  value = "postgresql://postgres.${module.supabase.supabase_database_id}:${var.supabase_database_password}@aws-1-ap-northeast-1.pooler.supabase.com:6543/postgres"
+}
+
