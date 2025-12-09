@@ -5,10 +5,10 @@ services:
     restart: always
     shm_size: 128mb
     volumes:
-     - type: tmpfs
-       target: /dev/shm
-       tmpfs:
-         size: 134217728 # 128MB
+      - type: tmpfs
+        target: /dev/shm
+        tmpfs:
+          size: 134217728 # 128MB
     environment:
       POSTGRES_DB: app-local
       POSTGRES_USER: app
