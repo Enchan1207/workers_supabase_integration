@@ -4,4 +4,4 @@ export const postsTable = pgTable('posts', {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   title: text().notNull(),
   content: text().notNull(),
-})
+}).enableRLS()
