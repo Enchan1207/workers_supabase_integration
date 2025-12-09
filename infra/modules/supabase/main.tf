@@ -21,7 +21,8 @@ variable "supabase_project_name" {
 }
 
 variable "supabase_database_password" {
-  type = string
+  type      = string
+  sensitive = true
 }
 
 variable "supabase_region" {

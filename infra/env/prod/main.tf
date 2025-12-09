@@ -60,11 +60,12 @@ module "supabase" {
   supabase_database_password = var.supabase_database_password
 }
 
+module "worker_secret" {
+  source       = "../../modules/worker_secret"
+  database_url = "postgresql://postgres.${module.supabase.supabase_database_id}:${var.supabase_database_password}@aws-1-ap-northeast-1.pooler.supabase.com:6543/postgres"
+  env          = "production"
+}
+
 output "VITE_AUTH0_CLIENT_ID" {
   value = module.auth0.auth0_app_client_id
 }
-
-output "DATABASE_URL" {
-  value = "postgresql://postgres.${module.supabase.supabase_database_id}:${var.supabase_database_password}@aws-1-ap-northeast-1.pooler.supabase.com:6543/postgres"
-}
-
