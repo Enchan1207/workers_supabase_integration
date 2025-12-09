@@ -1,12 +1,17 @@
-import 'dotenv/config'
-
 import { defineConfig } from 'drizzle-kit'
+import { loadEnv } from 'vite'
+
+// NOTE: シェル変数MODEを設定して環境を切り替え
+const mode = process.env['MODE'] ?? 'development'
+console.log(`Mode: ${mode}`)
+
+const env = loadEnv(mode, process.cwd(), '')
 
 export default defineConfig({
   out: './drizzle',
-  schema: ['./src/schema.ts'],
+  schema: ['./backend/schema.ts'],
   dialect: 'postgresql',
   dbCredentials: {
-    url: process.env.DATABASE_URL,
+    url: env.DATABASE_URL,
   },
 })
