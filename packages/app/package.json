@@ -5,9 +5,9 @@
         "dev": "vite",
         "build": "tsc -b && vite build",
         "deploy:stg": "vite build --mode=staging && wrangler --env=staging deploy",
-        "deploy:stg:secret": "wrangler --env=staging secret bulk .dev.vars.staging",
+        "deploy:stg:secret": "wrangler --env=staging secret bulk .env.staging.local",
         "deploy:prod": "vite build --mode=production && wrangler --env=production deploy",
-        "deploy:prod:secret": "wrangler --env=production secret bulk .dev.vars.production"
+        "deploy:prod:secret": "wrangler --env=production secret bulk .env.production.local"
     },
     "dependencies": {
         "@auth0/auth0-react": "^2.10.0",

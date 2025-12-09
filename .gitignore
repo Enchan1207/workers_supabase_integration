@@ -1,7 +1,5 @@
 .wrangler
-.dev.vars
-.dev.vars.*
-!.dev.vars.tftpl
+.env.staging.local
 
 # Created by https://www.toptal.com/developers/gitignore/api/node,react,direnv,terraform
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,react,direnv,terraform

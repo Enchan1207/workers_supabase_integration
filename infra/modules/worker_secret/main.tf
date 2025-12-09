@@ -7,7 +7,7 @@ variable "database_url" {
 }
 
 locals {
-  local_env = templatefile("${path.module}/.dev.vars.tftpl",
+  local_env = templatefile("${path.module}/.env.environment.tftpl",
     {
       database_url = var.database_url
     }
@@ -15,6 +15,6 @@ locals {
 }
 
 resource "local_file" "env_local" {
-  filename = "${path.root}/../../../packages/app/.dev.vars.${var.env}"
+  filename = "${path.root}/../../../packages/app/.env.${var.env}.local"
   content  = local.local_env
 }
