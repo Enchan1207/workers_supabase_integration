@@ -19,6 +19,6 @@
     "verbatimModuleSyntax": true,
     "types": ["@cloudflare/workers-types/experimental"]
   },
-  "include": ["./**/*.ts", "../vite-env.d.ts"],
+  "include": ["./**/*.ts", "../vite-env.d.ts", "../env.d.ts"],
   "exclude": ["dist", "node_modules"]
 }
