@@ -1,9 +1,9 @@
-import { integer, pgTable, primaryKey, text } from 'drizzle-orm/pg-core'
+import { pgTable, primaryKey, text } from 'drizzle-orm/pg-core'
 
 export const postsTable = pgTable(
   'posts',
   {
-    id: integer(),
+    id: text(),
     user_id: text(),
     title: text().notNull(),
     content: text().notNull(),
