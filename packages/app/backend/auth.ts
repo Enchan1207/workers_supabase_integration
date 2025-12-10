@@ -1,3 +1,4 @@
+import type { MiddlewareHandler } from 'hono'
 import { every } from 'hono/combine'
 import { createMiddleware } from 'hono/factory'
 import { jwk } from 'hono/jwk'
@@ -58,4 +59,7 @@ export const jwkValidator = createMiddleware<{
   return next()
 })
 
-export const jwkMiddleware = every(jwkParser, jwkValidator)
+export const jwkMiddleware: MiddlewareHandler<{
+  Bindings: Env
+  Variables: { jwtPayload: Auth0JWTPayload }
+}> = every(jwkParser, jwkValidator)

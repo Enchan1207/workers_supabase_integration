@@ -1,5 +1,5 @@
 import { zValidator } from '@hono/zod-validator'
-import { eq } from 'drizzle-orm'
+import { and, eq } from 'drizzle-orm'
 import { Hono } from 'hono'
 import z from 'zod'
 
@@ -12,20 +12,26 @@ const app = new Hono()
   .use(jwkMiddleware)
   .use(dbMiddleware)
   .get('/posts', async (c) => {
-    const records = await c.get('drizzle').select().from(postsTable)
+    const userId = c.get('jwtPayload').sub
+    const records = await c
+      .get('drizzle')
+      .select()
+      .from(postsTable)
+      .where(eq(postsTable.user_id, userId))
 
     return c.json({ items: records })
   })
   .get(
     '/posts/:id',
-    zValidator('param', z.object({ id: z.coerce.number() })),
+    zValidator('param', z.object({ id: z.string() })),
     async (c) => {
       const id = c.req.valid('param').id
+      const userId = c.get('jwtPayload').sub
       const item = await c
         .get('drizzle')
         .select()
         .from(postsTable)
-        .where(eq(postsTable.id, id))
+        .where(and(eq(postsTable.id, id), eq(postsTable.user_id, userId)))
         .then((records) => records.at(0))
 
       if (item === undefined) {
@@ -46,11 +52,14 @@ const app = new Hono()
     ),
     async (c) => {
       const body = c.req.valid('json')
+      const userId = c.get('jwtPayload').sub
 
       const inserted = await c
         .get('drizzle')
         .insert(postsTable)
         .values({
+          id: crypto.randomUUID(),
+          user_id: userId,
           title: body.title,
           content: body.content,
         })
