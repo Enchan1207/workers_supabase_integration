@@ -2,7 +2,7 @@
     "name": "app",
     "type": "module",
     "scripts": {
-        "dev": "vite",
+        "dev": "vite --mode=development",
         "build": "tsc -b && vite build",
         "deploy:stg": "vite build --mode=staging && wrangler --env=staging deploy",
         "deploy:stg:secret": "wrangler --env=staging secret bulk .env.staging.local",
