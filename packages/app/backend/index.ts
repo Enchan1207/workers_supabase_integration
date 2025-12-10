@@ -1,4 +1,5 @@
 import { zValidator } from '@hono/zod-validator'
+import type { InferSelectModel } from 'drizzle-orm'
 import { and, eq } from 'drizzle-orm'
 import { Hono } from 'hono'
 import z from 'zod'
@@ -6,6 +7,9 @@ import z from 'zod'
 import { jwkMiddleware } from './auth'
 import { dbMiddleware } from './db'
 import { postsTable } from './schema'
+
+// FIXME: あんまり綺麗じゃない、というかそもそもレコードをそのままレスポンスにするな
+type Model = InferSelectModel<typeof postsTable>
 
 const app = new Hono()
   .basePath('/api')
@@ -27,7 +31,7 @@ const app = new Hono()
     async (c) => {
       const id = c.req.valid('param').id
       const userId = c.get('jwtPayload').sub
-      const item = await c
+      const item: Model | undefined = await c
         .get('drizzle')
         .select()
         .from(postsTable)
