@@ -31,3 +31,10 @@ module "auth0" {
 output "VITE_AUTH0_CLIENT_ID" {
   value = module.auth0.auth0_app_client_id
 }
+
+data "external" "update_environment" {
+  program = ["pnpm", "-F", "infra-scripts", "exec", "tsx", "src/setenv.ts", "--mode", "development"]
+  query = {
+    client_id = module.auth0.auth0_app_client_id
+  }
+}
