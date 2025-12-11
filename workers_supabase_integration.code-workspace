@@ -13,7 +13,10 @@
       "path": ".github/workflows",
     },
     {
-      "name": "(package)",
+      "path": "./packages/infra-scripts",
+    },
+    {
+      "name": "(app)",
       "path": "./packages/app",
     },
     {
