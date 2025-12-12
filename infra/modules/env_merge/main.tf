@@ -7,7 +7,7 @@ variable "auth0_app_client_id" {
 }
 
 data "external" "merge_environment" {
-  program = ["pnpm", "-F", "infra-scripts", "exec", "tsx", "src/setenv.ts", "--mode", var.mode]
+  program = ["pnpm", "-F", "infra-scripts", "exec", "tsx", "src/update-env.ts", "--mode", var.mode]
   query = {
     VITE_AUTH0_CLIENT_ID = var.auth0_app_client_id
   }
