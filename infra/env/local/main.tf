@@ -28,13 +28,8 @@ module "auth0" {
   auth0_web_origin          = var.app_origin
 }
 
-output "VITE_AUTH0_CLIENT_ID" {
-  value = module.auth0.auth0_app_client_id
-}
-
-data "external" "update_environment" {
-  program = ["pnpm", "-F", "infra-scripts", "exec", "tsx", "src/setenv.ts", "--mode", "development"]
-  query = {
-    client_id = module.auth0.auth0_app_client_id
-  }
+module "merge_environment" {
+  source="../../modules/env_merge"
+  mode = "development"
+  auth0_app_client_id = module.auth0.auth0_app_client_id
 }
