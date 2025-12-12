@@ -67,7 +67,7 @@ const parseMode = (raw: string | undefined): (typeof Modes)[number] => {
 
 main({ modeRaw: options['mode'] })
   .then((c) => {
-    console.log(JSON.stringify({ ok: true }))
+    console.log(JSON.stringify({ ok: 'true' }))
     process.exit(c)
   })
   .catch((e: unknown) => {
