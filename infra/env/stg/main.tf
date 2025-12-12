@@ -66,6 +66,8 @@ module "worker_secret" {
   env          = "staging"
 }
 
-output "VITE_AUTH0_CLIENT_ID" {
-  value = module.auth0.auth0_app_client_id
+module "merge_environment" {
+  source="../../modules/env_merge"
+  mode = "staging"
+  auth0_app_client_id = module.auth0.auth0_app_client_id
 }
