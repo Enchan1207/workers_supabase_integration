@@ -8,35 +8,35 @@
   "workers_dev": false,
 
   "observability": {
-    "enabled": true,
+    "enabled": true
   },
 
   "assets": {
     "not_found_handling": "single-page-application",
-    "run_worker_first": ["/api/*"],
+    "run_worker_first": ["/api/*"]
   },
 
   "env": {
     "development": {
-      "name": "workers-supabase-integration-local",
+      "name": "workers-supabase-integration-local"
     },
     "staging": {
       "name": "workers-supabase-integration-stg",
       "routes": [
         {
           "pattern": "stg-workers-supabase-integration.enchan.me",
-          "custom_domain": true,
-        },
-      ],
+          "custom_domain": true
+        }
+      ]
     },
     "production": {
       "name": "workers-supabase-integration-prod",
       "routes": [
         {
           "pattern": "workers-supabase-integration.enchan.me",
-          "custom_domain": true,
-        },
-      ],
-    },
-  },
+          "custom_domain": true
+        }
+      ]
+    }
+  }
 }
